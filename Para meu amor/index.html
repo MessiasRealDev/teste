@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Você, Meu Amor ❤️</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #f8bbd0;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+        .container {
+            padding: 30px;
+            max-width: 800px;
+            background-color: rgba(30, 30, 46, 0.8);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(233, 30, 99, 0.3);
+            margin: 20px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #e91e63;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(233, 30, 99, 0.7);
+            color: #ff79b0;
+        }
+        p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin: 20px 0;
+        }
+        .heart {
+            font-size: 4em;
+            color: #e91e63;
+            animation: pulse 1s infinite, glow 2s infinite alternate;
+            margin: 20px 0;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .heart:hover {
+            transform: scale(1.2);
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        @keyframes glow {
+            from { text-shadow: 0 0 5px #e91e63; }
+            to { text-shadow: 0 0 20px #ff79b0, 0 0 30px #e91e63; }
+        }
+        .btn {
+            display: inline-block;
+            margin: 15px;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            color: white;
+            background: linear-gradient(45deg, #e91e63, #c2185b);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(233, 30, 99, 0.5);
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(233, 30, 99, 0.7);
+            background: linear-gradient(45deg, #ff4081, #e91e63);
+        }
+        .btn:active {
+            transform: translateY(1px);
+        }
+        #mensagem {
+            min-height: 100px;
+            font-size: 1.5em;
+            margin: 30px 0;
+            opacity: 0;
+            transition: all 1s;
+            transform: translateY(20px);
+            color: #ffb6c1;
+        }
+        .show {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+        .floating-hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        .floating-heart {
+            position: absolute;
+            font-size: 20px;
+            opacity: 0;
+            animation: float 6s linear infinite;
+            text-shadow: 0 0 10px rgba(233, 30, 99, 0.7);
+        }
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        .photo-frame {
+            width: 200px;
+            height: 200px;
+            margin: 20px auto;
+            border-radius: 50%;
+            border: 5px solid #e91e63;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(233, 30, 99, 0.5);
+            background-color: #2d2d44;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: sepia(30%) brightness(90%);
+        }
+        .countdown {
+            font-size: 1.5em;
+            margin: 20px 0;
+            color: #ff79b0;
+            font-weight: bold;
+            text-shadow: 0 0 5px rgba(233, 30, 99, 0.5);
+        }
+        .distance-message {
+            background-color: rgba(48, 48, 80, 0.7);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            font-style: italic;
+            border-left: 4px solid #e91e63;
+        }
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -2;
+        }
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle 1s infinite alternate;
+        }
+        @keyframes twinkle {
+            from { opacity: 0.3; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    <div class="container">
+        <div class="floating-hearts" id="floatingHearts"></div>
+        
+        <h1>Camilinha meu amor ✨</h1>
+        
+        <div class="photo-frame">
+            <!-- Substitua pelo caminho da foto da sua namorada -->
+            <img src="Captura de tela 2025-04-04 134718.png" alt="Foto do amor da minha vida">
+        </div>
+        
+        <div class="distance-message">
+            "Na escuridão da noite, seu sorriso brilha como as estrelas."
+        </div>
+        
+        <p>Mesmo separados pelo espaço, nossas almas estão sempre conectadas...</p>
+        
+        <div class="heart" onclick="createHearts()">❤️</div>
+        
+        <div>
+            <button class="btn" onclick="mostrarMensagem(1)">Mensagem do Dia</button>
+            <button class="btn" onclick="mostrarMensagem(2)">Porque te amo</button>
+            <button class="btn" onclick="mudarCoracao()">Me ama?</button>
+            <button class="btn" onclick="mostrarMensagem(3)">Quando nos vermos</button>
+        </div>
+        
+        <p id="mensagem"></p>
+        
+        <div class="countdown" id="countdown"></div>
+        
+        <div class="countdown" id="nextMeet"></div>
+    </div>
+
+    <script>
+        // Criar estrelas de fundo
+        function createStars() {
+            const container = document.getElementById("stars");
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement("div");
+                star.className = "star";
+                star.style.width = (Math.random() * 3) + "px";
+                star.style.height = star.style.width;
+                star.style.left = Math.random() * 100 + "%";
+                star.style.top = Math.random() * 100 + "%";
+                star.style.animationDelay = Math.random() * 2 + "s";
+                star.style.animationDuration = (1 + Math.random() * 2) + "s";
+                container.appendChild(star);
+            }
+        }
+
+        // Mensagens especiais
+        const mensagens = [
+            "Te amo mais que todas as estrelas no céu. Você é minha luz na escuridão. 💫",
+            "A distância é apenas um teste para provar o quanto nosso amor é forte e verdadeiro.",
+            "Enquanto eu tiver você em meus pensamentos, nenhuma distância será grande demais.",
+            "Seu amor é como a lua - mesmo quando não posso vê-lo, sei que está sempre lá.",
+            "Conto as horas até podermos nos encontrar novamente e perder o fôlego em um abraço.",
+            "Nosso amor é como as estrelas - brilhante, eterno e impossível de ignorar.",
+            "A distância não enfraquece o amor, só faz o coração amar com mais intensidade."
+        ];
+        
+        const motivos = [
+            "1. Porque você ilumina meus dias como a lua ilumina a noite",
+            "2. Porque seu sorriso (mesmo por foto) é meu raio de sol",
+            "3. Porque você entende meu silêncio à distância",
+            "4. Porque faz cada segundo de espera valer a pena",
+            "5. Porque seu amor me aquece mesmo nas noites frias",
+            "6. Porque você é minha melhor conexão, mesmo a distância",
+            "7. Porque nosso amor atravessa qualquer distância"
+        ];
+        
+        const encontro = [
+            "Mal posso esperar para te ver! Vou te abraçar como se não houvesse amanhã!",
+            "Quando nos encontrarmos, prometo fazer cada segundo valer todo esse tempo de espera.",
+            "Cada dia que passa é um dia a menos para nosso tão esperado reencontro!",
+            "Estou contando os minutos para nosso próximo encontro",
+            "Nada será mais mágico que o momento em que nossos olhos se encontrarem novamente."
+        ];
+
+        function mostrarMensagem(tipo) {
+            const mensagem = document.getElementById("mensagem");
+            let texto = "";
+            
+            switch(tipo) {
+                case 1:
+                    texto = mensagens[Math.floor(Math.random() * mensagens.length)];
+                    break;
+                case 2:
+                    texto = motivos.join("<br>");
+                    break;
+                case 3:
+                    texto = encontro[Math.floor(Math.random() * encontro.length)];
+                    break;
+                default:
+                    texto = mensagens[0];
+            }
+            
+            mensagem.innerHTML = texto;
+            mensagem.classList.add("show");
+            
+            // Esconde após 10 segundos
+            setTimeout(() => {
+                mensagem.classList.remove("show");
+            }, 10000);
+        }
+        
+        // Mudar coração
+        function mudarCoracao() {
+            const hearts = ['❤️', '💖', '💗', '💓', '💞', '💕', '💘'];
+            const randomHeart = hearts[Math.floor(Math.random() * hearts.length)];
+            document.querySelector(".heart").innerText = randomHeart;
+            createHearts(15);
+            
+            // Mostra mensagem especial
+            const mensagem = document.getElementById("mensagem");
+            mensagem.innerHTML = "Mais do que todas as estrelas no céu! Você é meu universo inteiro! 🌌";
+            mensagem.classList.add("show");
+            
+            setTimeout(() => {
+                mensagem.classList.remove("show");
+            }, 5000);
+        }
+        
+        // Criar corações flutuantes
+        function createHearts(count = 5) {
+            const container = document.getElementById("floatingHearts");
+            const hearts = ['❤️', '💖', '💗', '💓', '💞', '💕', '💘'];
+            
+            for (let i = 0; i < count; i++) {
+                const heart = document.createElement("div");
+                heart.className = "floating-heart";
+                heart.innerText = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + "%";
+                heart.style.animationDuration = (4 + Math.random() * 6) + "s";
+                heart.style.animationDelay = Math.random() * 2 + "s";
+                heart.style.fontSize = (15 + Math.random() * 20) + "px";
+                container.appendChild(heart);
+                
+                // Remove após a animação
+                setTimeout(() => {
+                    heart.remove();
+                }, 6000);
+            }
+        }
+        
+        // Contador de tempo juntos
+        function updateCountdown() {
+            // Substitua pela data em que começaram a namorar
+            const startDate = new Date("2024-11-27");
+            const now = new Date();
+            
+            const diff = now - startDate;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            
+            document.getElementById("countdown").innerHTML = 
+                `Juntos há <strong>${days}</strong> dias e <strong>${Math.floor(hours)}</strong> horas de amor verdadeiro.<br>
+                E cada momento distante só prova nossa conexão eterna.`;
+        }
+        
+        // Contador para próximo encontro (substitua pela data)
+        function updateNextMeet() {
+            // Substitua pela data do próximo encontro
+            const meetDate = new Date("2025-04-18");
+            const now = new Date();
+            
+            const diff = meetDate - now;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            
+            if (diff > 0) {
+                document.getElementById("nextMeet").innerHTML = 
+                    `Faltam apenas <strong>${days}</strong> dias e <strong>${Math.floor(hours)}</strong> horas<br>
+                    para nosso encontro ✨`;
+            } else {
+                document.getElementById("nextMeet").innerHTML = 
+                    `Já deveríamos estar abraçados agora! Onde você está, meu amor? 😍`;
+            }
+        }
+        
+        // Atualiza os contadores
+        updateCountdown();
+        updateNextMeet();
+        setInterval(updateCountdown, 60000);
+        setInterval(updateNextMeet, 3600000);
+        
+        // Cria alguns corações iniciais
+        window.onload = function() {
+            createStars();
+            createHearts(3);
+        };
+    </script>
+</body>
+</html>
